@@ -2,7 +2,7 @@
 <html lang="en"></html>
 <head>
   <meta charset="UTF-8" />
-  <title>Lab 1 | Hello Audio</title>
+  <title>Lab 2 | Start/Stop</title>
 </head>
 <body>
   <button id="start1">Start</button>
@@ -11,6 +11,7 @@
   <button id="stop2">Stop 2</button>
   <script>
     const ctx = new AudioContext();
+    const base = 440;
 
     const myGain = new GainNode(ctx);
     myGain.gain.value = 0.125;
@@ -20,11 +21,11 @@
     document.querySelector("#start1").onclick = () => {
       ctx.resume();
       osc1 = new OscillatorNode(ctx);
-      osc1.frequency.value = 110;
-      osc1.type = "sawtooth";
+      osc1.frequency.value = base;
+      osc1.type = "triangle";
 
       osc2 = new OscillatorNode(ctx);
-      osc2.frequency.value = 110 * 4.1;
+      osc2.frequency.value = base * 0.99;
 
       osc1.connect(myGain);
       osc2.connect(myGain);
@@ -41,11 +42,12 @@
     document.querySelector("#start2").onclick = () => {
       ctx.resume();
       osc3 = new OscillatorNode(ctx);
-      osc3.frequency.value = 465;
+      osc3.frequency.value = base * 2;
       osc3.type = "triangle";
 
       osc4 = new OscillatorNode(ctx);
-      osc4.frequency.value = 465 * 4.1;
+      osc4.frequency.value = base * 2.2;
+      osc4.type = "triangle";
 
       osc3.connect(myGain);
       osc4.connect(myGain);
